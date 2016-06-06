@@ -13,14 +13,11 @@ module.exports = {
     filename: 'relayr-browser-sdk.js', //bundle includes node_modules
     publicPath: '/dist/'
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  plugins: [],
   module: {
     loaders: [{
       test: /\.js$/,
-      loaders: ['react-hot', 'babel'],
-      include: path.join(__dirname, 'src')
+      loaders: ['babel']
     }]
   }
 };

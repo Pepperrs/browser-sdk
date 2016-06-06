@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import expect, {
     createSpy, spyOn, isSpy
 }
@@ -40,3 +41,5 @@ describe('Main', () => {
                         });
                     });
                 });
+=======
+>>>>>>> a9673ea23bb83d3461451b46c449d7792262ca23

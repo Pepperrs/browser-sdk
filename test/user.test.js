@@ -1,5 +1,5 @@
-import User from './entities/user'
 
+<<<<<<< HEAD
 
 describe('user', () => {
 
@@ -118,3 +118,5 @@ describe('user', () => {
                 }));
             });
         });
+=======
+>>>>>>> a9673ea23bb83d3461451b46c449d7792262ca23

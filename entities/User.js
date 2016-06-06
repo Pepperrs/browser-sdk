@@ -1,25 +1,42 @@
-class User {
-    constructor(token) {
-        this.token: token,
-        user
+export
+default class User {
+    constructor(token, user) {
+
+        this.user.id = userId
+        this.user.name = userName
+        this.user.email = email
+
     }
 
-    getUserById() {
-        this.userId = "123";
-        this.email = "email@relayr.io"
-    }
-
-    get token() {
+    getToken() {
         return this.token;
     }
 
+    setToken() {
+        //???
+    }
 
+    hasToken() {
+        if (user.token) {
+            return true;
+        }
+    }
+
+    getUserInfo(token) {
+
+    }
+
+
+
+    // getalldevices() {
+    //     return this.devices;
+    // }
 }
-
-module.exports = User;
 
 //getToken
 //setToken
 //hasToken
 //getUserInfo
-//logout
+//getalldevices
+//getdevice??
+//logout- move to util?

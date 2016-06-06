@@ -40,6 +40,7 @@
     "expect": "^1.20.1"
   },
   "dependencies": {
+    "expect": "^1.20.1",
     "react": "^0.14.6",
     "react-dom": "^0.14.6"
   }

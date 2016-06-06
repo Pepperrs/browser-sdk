@@ -40,30 +40,3 @@ describe('Main', () => {
                         });
                     });
                 });
-
-
-
-
-
-
-
-
-
-                //Group
-                // getAllGroups
-
-                //Model
-                // getAllModels
-
-                //Transmitter
-                // getTransmitters
-                // deleteTransmitter
-                // updateTransmitter
-
-                //User
-                //getToken
-                //setToken
-                //hasToken
-                //getUserInfo
-                //logout
-                // getAllDevices

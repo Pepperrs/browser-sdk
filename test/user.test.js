@@ -5,6 +5,35 @@ describe('user', () => {
 
         let fakeuser;
         beforeEach(() => {
+
+            //from old tests to fake requests
+            describe('relayr SDK', function() {
+                var xhr, requests;
+                beforeEach(function() {
+                    xhr = sinon.useFakeXMLHttpRequest();
+                    requests = [];
+                    xhr.onCreate = function(xhr) {
+                        requests.push(xhr);
+                    }
+                });
+
+                describe('#init', function() {
+                    var validInputs = [{
+                        appId: "37648273648628",
+                        redirectUri: "34324234"
+                    }];
+
+                    //presumably the form of this will change?
+                    it('should initialize with constructor with valid arguments', function() {
+                        var relayr = new RELAYR({
+                            appId: '37648273648628',
+                            redirectUri: '34324234'
+                        });
+                        expect(typeof relayr.login).toBe('function');
+
+                    });
+                });
+            });
             //will this stay the same as last time? Almost definitely not...
             // describe('users', () => {
             //     var relayr;
@@ -26,6 +55,9 @@ describe('user', () => {
                 // "token": "fakeToken",
                 // "devices": [{}, {}, {}]
             }
+            before(function() {
+                sinon.stub().yieldsTo("success", fakeUser);
+            });
         })
 
         describe('can be instantiated', () => {
@@ -48,7 +80,7 @@ describe('user', () => {
 
             it('should do a GET to get the user object', function() {
                 expect(userInstance.getuser({
-                    userId: 'user-id'
+                    fakeToken
                 }, function() {}, function() {})). //toReturn? or something?
 
 

@@ -19,11 +19,23 @@ For a list of the basic available functionalities in the SDK please refer to our
 
 ```
 npm install
-npm start
-open http://localhost:3000
+
 ```
 
-Maybe you need to add .babelrc per hand if it is not copied correctly.
+Maybe you need to add .babelrc per hand if it is not copied properly.
+
+### Build
+
+For the build process you need to install the webpack cli:
+
+```
+npm install webpack -g
+```
+
+```
+npm run build:js
+npm run build:min:js
+```
 
 ### Tests
 
@@ -31,38 +43,11 @@ Maybe you need to add .babelrc per hand if it is not copied correctly.
 npm test
 npm run test:watch
 ```
-See the assertion library: [assertion library](https://github.com/mjackson/expect)
+[assertion library](https://github.com/mjackson/expect)
 
-### Gulp Tasks
-
-Use gulp for bundling
-
-install the gulp cli globally (as root)
+### Run the webpack dev server and run some examples
 
 ```
-$ npm install gulp -g
-```
-
-Run gulp to build the bundle.js amd base.css on file save
-
-```
-$ gulp
-```
-
-Run gulp deploy to build and minify the bundle.js and base.css to /dist/min/bundle.js and base.css
-
-```
-$ gulp deploy
-```
-
-Run gulp webpack to build the uncompressed bundle to /dist/bundle.js
-
-```
-$ gulp webpack
-```
-
-Run gulp sass to build the uncompressed base.css to /dist/css/base.css
-
-```
-$ gulp sass
+npm start
+open http://localhost:3000/examples/index.html
 ```

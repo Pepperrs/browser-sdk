@@ -10,8 +10,8 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/example/'
+    filename: 'relayr-browser-sdk.js', //bundle includes node_modules
+    publicPath: '/dist/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()

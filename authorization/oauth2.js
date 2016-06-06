@@ -1,23 +1,6 @@
 const TOKEN_KEY = 'relayr_access_token';
 class Oauth2 {
-<<<<<<< HEAD
-    constructor(project) {
-        this.project = project;
-    }
 
-    get token() {
-        return this.token();
-    }
-
-    login(optUser, ctx) {
-        //We redirect to relayr Login and start the login process
-
-    }
-
-    logout() {
-        //do something
-    }
-=======
     constructor(options) {
         this.appId = options.appId;
         this.redirectURI = options.redirectURI;
@@ -60,9 +43,6 @@ class Oauth2 {
 
         this.token = authParams.token_type + ' ' + authParams.access_token;
     }
-
->>>>>>> a9673ea23bb83d3461451b46c449d7792262ca23
-
 }
 
 module.exports = Oauth2;

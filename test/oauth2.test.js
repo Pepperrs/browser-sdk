@@ -17,38 +17,44 @@ describe('oauth2', function() {
         oauthInstance = new Oauth2(options);
     });
 
-    describe('#login', function () {
+    describe('#login', function() {
         beforeEach(function() {
             sinon.spy(oauthInstance, '_loginRedirect');
         });
-        it('should bulid a URL with provided app id and redirect uri', function () {
+        it('should bulid a URL with provided app id and redirect uri', function() {
             oauthInstance.login();
 
             expect(oauthInstance._loginRedirect).to.have.been.calledWith('https://api.relayr.io/oauth2/auth?client_id=fakeAppId&redirect_uri=fakeURI&response_type=token&scope=access-own-user-info+configure-devices');
         });
 
-        it('should build a URL with configured input ', function () {
+        it('should build a URL with configured input ', function() {
             oauthInstance.appId = 'new-fake-app-id';
             oauthInstance.login();
 
             expect(oauthInstance._loginRedirect).to.have.been.calledWith('https://api.relayr.io/oauth2/auth?client_id=new-fake-app-id&redirect_uri=fakeURI&response_type=token&scope=access-own-user-info+configure-devices');
         });
 
-        it('should throw an error if no redirect uri was provided', function () {
+        it('should throw an error if no redirect uri was provided', function() {
             oauthInstance.redirectURI = null;
-            var fn = function() { oauthInstance.login(); };
+            var fn = function() {
+                oauthInstance.login();
+            };
             expect(fn).to.throw(Error);
         });
 
-        it('should throw an error if no app id was provided', function () {
+        it('should throw an error if no app id was provided', function() {
             oauthInstance.appId = null;
-            var fn = function() { oauthInstance.login(); };
+            var fn = function() {
+                oauthInstance.login();
+            };
             expect(fn).to.throw(Error);
         });
 
-        it('should have a response type token', function () {
+        it('should have a response type token', function() {
             oauthInstance.appId = null;
-            var fn = function() { oauthInstance.login(); };
+            var fn = function() {
+                oauthInstance.login();
+            };
             expect(fn).to.throw(Error);
         });
 
@@ -90,6 +96,26 @@ describe('oauth2', function() {
         });
     });
 
+    describe('#_loginRedirect', function() {
+        beforeEach(function() {
+            let options = {
+                appId: 'fakeAppId',
+                redirectURI: 'fakeURI',
+                persist: true
+            };
+
+            oauthInstance = new Oauth2(options);
+            sinon.spy(oauthInstance, '_loginRedirect');
+        });
+
+        it('should build the redirect from the appID and redirect URI', function() {
+            //do we need this? 
+            let uri = 'https://api.relayr.io/oauth2/auth?client_id=fakeAppId&redirect_uri=fakeURI&response_type=token&scope=access-own-user-info+configure-devices';
+            oauthInstance._loginRedirect(uri)
+            expect(oauthInstance._loginRedirect).to.have.been.calledWith('https://api.relayr.io/oauth2/auth?client_id=fakeAppId&redirect_uri=fakeURI&response_type=token&scope=access-own-user-info+configure-devices')
+        });
+    });
+
     describe('#parseToken', function() {
         it('should return token provided in URL as a query paramter', function() {
             oauthInstance.parseToken('example.com/oauth#access_token=A_FAKE_TOKEN&token_type=Bearer');
@@ -97,17 +123,23 @@ describe('oauth2', function() {
         });
 
         it('should throw an error when the URL is emptys', function() {
-            var fn = function() { oauthInstance.parseToken(''); };
+            var fn = function() {
+                oauthInstance.parseToken('');
+            };
             expect(fn).to.throw(Error);
         });
 
         it('should throw an error when no query parameter is provided', function() {
-            var fn = function() { oauthInstance.parseToken('example.com/oauth#'); };
+            var fn = function() {
+                oauthInstance.parseToken('example.com/oauth#');
+            };
             expect(fn).to.throw(Error);
         });
 
         it('should throw an error when no access token is provided', function() {
-            var fn = function() { oauthInstance.parseToken('example.com/oauth#BLABLA'); };
+            var fn = function() {
+                oauthInstance.parseToken('example.com/oauth#BLABLA');
+            };
             expect(fn).to.throw(Error);
         });
 
@@ -117,4 +149,43 @@ describe('oauth2', function() {
             });
         });
     });
+
+    describe('#setToken', function() {
+        beforeEach(function() {
+            let token = 'A_FAKE_TOKEN'
+            localStorage.setItem('relayrToken', token);
+
+            let options = {
+                appId: 'fakeAppId',
+                redirectURI: 'fakeURI',
+                persist: true
+            };
+            oauthInstance = new Oauth2(options);
+        });
+
+        it('should remove the token from local storage', function() {
+            oauthInstance.logout();
+            expect(localStorage.getItem('relayrToken')).to.equal('A_FAKE_TOKEN');
+        });
+    });
+
+    describe('#logout', function() {
+        beforeEach(function() {
+            let token = 'A_FAKE_TOKEN'
+            localStorage.setItem('relayrToken', token);
+
+            let options = {
+                appId: 'fakeAppId',
+                redirectURI: 'fakeURI',
+                persist: true
+            };
+            oauthInstance = new Oauth2(options);
+        });
+
+        it('should remove the token from local storage', function() {
+            oauthInstance.logout();
+            expect(localStorage.getItem('relayrToken')).to.throw(Error);
+        });
+    });
+
 });

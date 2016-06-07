@@ -7,7 +7,7 @@ class Oauth2 {
         this.shouldPersist = options.persist || false;
     }
 
-    login(optUser, ctx) {
+    login(optUser, ctx) { //what do you do with the optional parameters?
         if (!this.redirectURI) {
             throw Error('OAuth2 a valid redirect uri must be provided on login');
         } else if (!this.appId) {
@@ -16,14 +16,23 @@ class Oauth2 {
 
         let storedToken = localStorage.getItem(TOKEN_KEY);
         if (this.shouldPersist && storedToken) {
-            this.token = storedToken;
+            this.token = storedToken; //do you have to declare token as a variable in the constructor or something first?
             return;
         }
 
-        this._loginRedirect(`https://api.relayr.io/oauth2/auth?client_id=${this.appId}&redirect_uri=${this.redirectURI}&response_type=token&scope=access-own-user-info+configure-devices`);
+        let authURL = {
+            client_id: this.appId,
+            redirect_uri: this.redirectURI,
+            scope: 'access-own-user-info+configure-devices'
+        };
+
+        let uri = ('https://api.relayr.io/oauth2/auth?client_id=' + authURL.client_id + '&redirect_uri=' + authURL.redirect_uri + '&response_type=token&scope=' + authURL.scope);
+        this._loginRedirect(uri) //`https://api.relayr.io/oauth2/auth?client_id=${this.appId}&redirect_uri=${this.redirectURI}&response_type=token&scope=access-own-user-info+configure-devices`);
     }
 
-    _loginRedirect() {}
+    _loginRedirect(uri) {
+        //doc.location = uri;
+    }
 
     parseToken(tokenURL) {
         var parts = tokenURL.split('#');
@@ -42,7 +51,18 @@ class Oauth2 {
         }
 
         this.token = authParams.token_type + ' ' + authParams.access_token;
+        this.setToken(this.token);
     }
+
+    setToken(token) {
+        localStorage.setItem('relayrToken', this.token);
+    };
+
+
+    logout() {
+        localStorage.removeItem('relayrToken');
+    }
+
 }
 
 module.exports = Oauth2;

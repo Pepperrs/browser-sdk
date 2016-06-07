@@ -29,6 +29,9 @@ default class Device {
             });
         });
     };
+
+    getDevice() {};
+    _ajax() {};
 };
 
 // getDeviceState

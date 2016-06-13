@@ -112,9 +112,9 @@ describe('Device', function() {
 
       deviceInstance.updateDevice(patch, true).then((response) => {
         //console.log(response);
+        expect(patch).to.deep.equal(response);
         done();
       });
-      expect(patch).to.deep.equal(response);
 
       //this is the api
       this.requests[0].respond(200, {

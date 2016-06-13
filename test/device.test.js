@@ -141,10 +141,9 @@ describe('Device', function() {
 
       deviceInstance.ajax.customXHR = this.xhr;
       deviceInstance.deleteDevice(data).then((response) => {
-        // console.log((deviceInstance === undefined));
+        expect(response).to.be.defined;
         done();
       });
-      expect(deviceInstance).to.be.undefined;
 
       //this is the api
       this.requests[0].respond(204, {

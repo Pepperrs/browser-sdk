@@ -55,7 +55,6 @@ default class Ajax {
         patch: patch,
         isObject: raw || true
       }).then((result) => {
-        console.log(result);
         resolve(result);
 
       }).catch((xhrObject) => {
@@ -103,7 +102,6 @@ default class Ajax {
     return new Promise((resolve, reject) => {
 
       xhrObject.onreadystatechange = function() {
-        console.log('1');
         if (xhrObject.readyState === 4) {
           if (xhrObject.status > 199 && xhrObject.status < 299) {
             if (options.isObject) {

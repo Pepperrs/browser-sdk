@@ -62,11 +62,6 @@ describe('User', function() {
 
   describe('#getMyGroups', function() {
 
-
-    it('should get the current config', function() {
-      expect(userInstance._getConfig()).to.deep.equal(fakeConfig);
-    });
-
     it('should resolve a promise with group info', function(done) {
       let groupStub =
         [{
@@ -91,17 +86,14 @@ describe('User', function() {
 
       userInstance.ajax.customXHR = this.xhr;
       userInstance.getMyGroups().then((result) => {
-        expect(result).to.deep.equal(groupStub);
+        expect(result).to.deep.equal(groupStub[0]);
         done();
       });
 
 
       this.requests[0].respond(200, {
         'Content-Type': 'text/json'
-      }, JSON.stringify(userStub));
+      }, JSON.stringify(groupStub));
     });
-
-
-
   });
 });

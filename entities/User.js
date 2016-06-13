@@ -26,7 +26,6 @@ default class User {
   getMyDevices() {
     return new Promise((resolve, reject) => {
       this.getUserInfo().then(() => {
-        // console.log(this.userInfo.id)
         this.ajax.get(`/users/${this.userInfo.id}/devices`).then((response) => {
           resolve(response)
         }).catch((error) => {
@@ -39,8 +38,8 @@ default class User {
   getMyGroups() {
     return new Promise((resolve, reject) => {
       this.getUserInfo().then(() => {
-        // console.log(this.userInfo.id)
         this.ajax.get(`/users/${this.userInfo.id}/groups`).then((response) => {
+          console.log('1');
           resolve(response)
         }).catch((error) => {
           reject(error);

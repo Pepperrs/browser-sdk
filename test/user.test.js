@@ -45,8 +45,8 @@ describe('User', function() {
       }
 
       userInstance.ajax.customXHR = this.xhr;
-      userInstance.getUserInfo().then((userInfo) => {
-        expect(userInfo).to.deep.equal(userStub);
+      userInstance.getUserInfo().then((response) => {
+        expect(response).to.deep.equal(userStub);
         done();
       });
 
@@ -55,9 +55,30 @@ describe('User', function() {
         'Content-Type': 'text/json'
       }, JSON.stringify(userStub));
     });
+  });
+
+  describe('#getMydevices', function() {
+
+    it('should resolve a promise with group info', function(done) {
+      let deviceStub = {
+        deviceId: 'fakeDeviceId',
+        name: 'fakeDeviceName',
+        model: 'fakeModel',
+        owner: 'fakeOwner',
+        openToPublic: false
+      };
+
+      userInstance.ajax.customXHR = this.xhr;
+      userInstance.getMyDevices().then((result) => {
+        expect(result).to.deep.equal(deviceStub);
+        done();
+      });
 
 
-
+      this.requests[0].respond(200, {
+        'Content-Type': 'text/json'
+      }, JSON.stringify(deviceStub));
+    });
   });
 
   describe('#getMyGroups', function() {
@@ -95,4 +116,5 @@ describe('User', function() {
       }, JSON.stringify(groupStub));
     });
   });
+
 });

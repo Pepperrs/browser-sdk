@@ -14,7 +14,7 @@ default class User {
       } else {
         this.ajax.get("/oauth2/user-info").then((response) => {
           this.userInfo = response;
-          resolve(response)
+          resolve(response);
         }).catch((error) => {
           reject(error);
         });
@@ -27,7 +27,7 @@ default class User {
     return new Promise((resolve, reject) => {
       this.getUserInfo().then(() => {
         this.ajax.get(`/users/${this.userInfo.id}/devices`).then((response) => {
-          resolve(response)
+          resolve(response);
         }).catch((error) => {
           reject(error);
         });
@@ -39,8 +39,7 @@ default class User {
     return new Promise((resolve, reject) => {
       this.getUserInfo().then(() => {
         this.ajax.get(`/users/${this.userInfo.id}/groups`).then((response) => {
-          console.log('1');
-          resolve(response)
+          resolve(response);
         }).catch((error) => {
           reject(error);
         });

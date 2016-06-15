@@ -44,11 +44,6 @@ default class Device {
         })
     }
 
-
-    getDeviceState() {
-
-    }
-
     deleteDevice(raw) {
         if (!(this.deviceId)) {
             throw new Error('Provide the userId during instantiation');
@@ -125,5 +120,79 @@ default class Device {
                 resolve(all[1])
             });
         });
+    }
+
+
+
+    getDeviceState() {
+
+
+        //     "readings": [{
+        //         "path": "",
+        //         "meaning": "someMeaning",
+        //         "value": "30",
+        //         "received": 1465394436003
+        //     }],
+        //     "version": {
+        //         "commands": {
+        //             "number": 0,
+        //             "ts": 1466003661234
+        //         },
+        //         "configurations": {
+        //             "number": 0,
+        //             "ts": 1466003661234
+        //         },
+        //         "readings": {
+        //             "number": 0,
+        //             "ts": 1466003661234
+        //         },
+        //         "metadata": {
+        //             "number": 0,
+        //             "ts": 1466003661234
+        //         }
+        //     },
+        //     "metadata": {},
+        //     "configurations": [],
+        //     "commands": []
+        // }
+
+        // api/devices/deviceId/state
+
+    }
+
+    getDeviceReadings() {
+        // api/devices/deviceId/readings
+    }
+
+    getDeviceConfigurations() {
+        // api/devices/deviceId/configurations
+    }
+
+    setDeviceConfigurations() {
+        // api/devices/deviceId/configurations
+        //POST
+    }
+
+    getDeviceCommands() {
+        // api/devices/deviceId/commands
+    }
+
+    setDeviceCommands() {
+        // api/devices/deviceId/commands
+        //POST
+    }
+
+    getDeviceMetadata() {
+        // api/devices/deviceId/metadata
+    }
+
+    setDeviceMetadata() {
+        // api/devices/deviceId/metadata
+        //POST
+    }
+
+    deleteDeviceMetadata() {
+        // api/devices/deviceId/metadata
+        //DELETE
     }
 };

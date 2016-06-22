@@ -1,7 +1,10 @@
 import Ajax from '../tools/ajax.js';
 import Connection from '../tools/connection.js';
 import DeviceHistory from './history/DeviceHistory';
-import { mqtt } from '../tools/mqtt';
+import {
+    mqtt
+}
+from '../tools/mqtt';
 
 import Model from '../entities/Model';
 
@@ -43,7 +46,9 @@ default class Device {
         }
 
         return new Promise((resolve, reject) => {
-            this.ajax.patch(`/devices/${this.id}`, patch, {raw:raw})
+            this.ajax.patch(`/devices/${this.id}`, patch, {
+                raw: raw
+            })
                 .then((response) => {
                     this.name = response.name;
                     this.modelId = response.modelId;
@@ -95,7 +100,9 @@ default class Device {
         }
 
         return new Promise((resolve, reject) => {
-            this.ajax.patch(`/devices/${this.id}`, patch, {raw:raw})
+            this.ajax.patch(`/devices/${this.id}`, patch, {
+                raw: raw
+            })
                 .then((response) => {
                     resolve(response);
                 }).catch((error) => {

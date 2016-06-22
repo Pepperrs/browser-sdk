@@ -22,6 +22,7 @@ const config = {
 
 let currentUser;
 let project;
+let oauth2;
 export
 default {
     init: function(p, customConfig) {
@@ -35,12 +36,14 @@ default {
     authorize: function(optionalToken) {
         return new Promise((resolve, reject) => {
 
-            const oauth2 = new Oauth2({
-                uri: config.ajax.uri,
-                appId: project.id,
-                redirectURI: project.redirectURI,
-                persist: config.persistToken
-            });
+            if (!oauth2) {
+                oauth2 = new Oauth2({
+                    uri: config.ajax.uri,
+                    appId: project.id,
+                    redirectURI: project.redirectURI,
+                    persist: config.persistToken
+                });
+            }
             if (!optionalToken) {
                 oauth2.login();
 
@@ -53,6 +56,10 @@ default {
             currentUser = new User(config);
             resolve(currentUser);
         });
+    },
+
+    logout: function() {
+        oauth2.logout();
     },
 
     getConfig: function() {

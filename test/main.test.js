@@ -3,7 +3,8 @@ import User from '../entities/user';
 
 let oauthMock = {
     token: 'fake-token',
-    login: sinon.spy()
+    login: sinon.spy(),
+    logout: sinon.spy()
 };
 
 main.__Rewire__('Oauth2', function() { return oauthMock; });
@@ -57,6 +58,14 @@ describe('Main', function() {
             it('should set the token', function() {
                 expect(main.getConfig().ajax.token).to.be.equal('fake-provided-token');
             });
+        });
+    });
+
+    describe('#logout', function() {
+        it('should log the user out', function() {
+            main.logout();
+
+            expect(oauthMock.logout).to.have.beenCalledOnce;
         });
     });
 });

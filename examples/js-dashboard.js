@@ -1,5 +1,7 @@
 //connect to cloud
+//why does it follow the pattern var relayr = RELAYR?? can it be anything since it is called "default" in the main??
 var relayr = RELAYR.init({
+    //given the init fn, how would you know that it needs the appID and redirect??
     // this comes from the api key page on the dashboard
     appId: keys.APP_ID,
     // this identifies my website as a 'trusted user' basically- it expects me to show up and ask for access to stuff

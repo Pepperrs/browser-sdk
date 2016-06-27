@@ -1,6 +1,10 @@
-export default class DeviceHistoryPoints {
+export
+default class DeviceHistoryPoints {
+    //KM what are the poijnts for? is it like an array of the history readings or something?
     constructor(deviceHistory) {
-        if (!deviceHistory) { return {}; }
+        if (!deviceHistory) {
+            return {};
+        }
 
         let devicesPoints = {};
 
@@ -9,7 +13,9 @@ export default class DeviceHistoryPoints {
             if (devicesPoints[key]) {
                 devicesPoints[key].points = devicesPoints[key].points.concat(res.points);
             } else {
-                devicesPoints[key] = Object.assign({id:res.deviceId}, res);
+                devicesPoints[key] = Object.assign({
+                    id: res.deviceId
+                }, res);
                 delete devicesPoints[key].deviceId;
             }
         });

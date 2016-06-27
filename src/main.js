@@ -2,12 +2,15 @@ import Oauth2 from './authorization/oauth2';
 import User from './entities/User';
 import Device from './entities/Device';
 import Ajax from './tools/ajax';
+//KM why is mqtt an object?
 import {
     mqtt
 }
 from './tools/mqtt';
 
-export let device = Device;
+//KM why device and nothing else?
+export
+let device = Device;
 
 const config = {
     persistToken: true,
@@ -24,7 +27,11 @@ const config = {
 let currentUser;
 let project;
 let oauth2;
-export default {
+
+//KM what it the init/authorize process here? How do you work with it with an "export default" rather than a class name?
+export
+default {
+    //KM does p by definition include redirect and appID like last time? Should we make that clearer here, or somewhere?
     init: function(p, customConfig) {
         project = p;
 

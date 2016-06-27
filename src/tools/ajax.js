@@ -1,4 +1,5 @@
-export default class Ajax {
+export
+default class Ajax {
     constructor(options) {
         this.tokenType = options.tokenType;
         this.token = options.token;
@@ -7,14 +8,18 @@ export default class Ajax {
         this.customXHR;
     }
 
-    get(url, opts ={ contentType: 'application/json' }) {
+    //KM why is opts hard coded like this? it seems different. 
+    get(url, opts = {
+        contentType: 'application/json'
+    }) {
 
         if (!url) {
             throw new Error('Please provide atleast a url');
         }
-        if (typeof (url) !== 'string') {
+        if (typeof(url) !== 'string') {
             throw new Error('Please provide a string url');
         }
+        //KM does opts have a queryObj? All I see is a contentType? Also, why is this only on get and not the others?
         url += this._serializeQueryStr(opts.queryObj);
 
         return new Promise((resolve, reject) => {
@@ -32,9 +37,11 @@ export default class Ajax {
     }
 
 
-    post(url, body, opts ={ contentType: 'application/json' }) {
+    post(url, body, opts = {
+        contentType: 'application/json'
+    }) {
         if (!url) throw new Error('Please provide atleast a url');
-        if (typeof (url) !== 'string') throw new Error('Please provide a string url');
+        if (typeof(url) !== 'string') throw new Error('Please provide a string url');
 
         return new Promise((resolve, reject) => {
             var xhrObject = this._xhrRequest({
@@ -51,9 +58,11 @@ export default class Ajax {
         });
     }
 
-    patch(url, body, opts ={ contentType: 'application/json' }) {
+    patch(url, body, opts = {
+        contentType: 'application/json'
+    }) {
         if (!url) throw new Error('Please provide atleast a url');
-        if (typeof (url) !== 'string') throw new Error('Please provide a string url');
+        if (typeof(url) !== 'string') throw new Error('Please provide a string url');
 
         return new Promise((resolve, reject) => {
             var xhrObject = this._xhrRequest({
@@ -71,9 +80,11 @@ export default class Ajax {
         });
     }
 
-    delete(url, opts ={ contentType: 'application/json' }) {
+    delete(url, opts = {
+        contentType: 'application/json'
+    }) {
         if (!url) throw new Error('Please provide atleast a url');
-        if (typeof (url) !== 'string') throw new Error('Please provide a string url');
+        if (typeof(url) !== 'string') throw new Error('Please provide a string url');
 
         return new Promise((resolve, reject) => {
             var xhrObject = this._xhrRequest({
@@ -90,7 +101,7 @@ export default class Ajax {
         });
     }
 
-
+    //KM when would you get an object on top of the url? and why would you then add stuff to it?
     _serializeQueryStr(obj) {
         var str = [];
 
@@ -98,6 +109,7 @@ export default class Ajax {
             return '';
         }
 
+        //KM why does it make sense to nest an if... hasOwnProperty in a for/in loop? isn't it the definition that it'll have property p?
         for (var p in obj) {
             if (obj.hasOwnProperty(p)) {
                 str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));

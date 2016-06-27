@@ -1,5 +1,6 @@
 import Paho from '../../vendors/mqttws31.min.js';
 
+//KM why is mqtt an object?
 class Mqtt {
     constructor(config) {
         var self = this;
@@ -28,6 +29,7 @@ class Mqtt {
         return this;
     }
 
+    //KM where do these username and pass come from?
     connect(config) {
         if (!config) throw Error('You must provide configuration options');
         if (!config.userName) throw Error('You must provide userName in options');
@@ -122,6 +124,9 @@ class Mqtt {
 
 }
 
-export let mqtt = new Mqtt();
-
-export default Mqtt;
+//KM now why is it no longer an object?
+export
+let mqtt = new Mqtt();
+//KM why does it need both of these?
+export
+default Mqtt;

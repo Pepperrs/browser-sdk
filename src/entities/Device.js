@@ -1,16 +1,23 @@
 import Ajax from '../tools/ajax.js';
 import Connection from '../tools/connection.js';
 import DeviceHistory from './history/DeviceHistory';
-import { mqtt } from '../tools/mqtt';
+import {
+    mqtt
+}
+from '../tools/mqtt';
 import Model from './Model';
 
+//KM what is a shared channel? when would one need it?
 let sharedChannel = null;
 
-export default class Device {
+export
+default class Device {
+    //KM why do you define raw device as an enpty object only to then redefine it? to make a default?
     constructor(rawDevice = {}, config) {
         this.rawDevice = rawDevice;
         this.config = config;
 
+        //KM if raw device defaults to an empty object, does it crash when it's looking for these?
         this.id = rawDevice.id;
         this.name = rawDevice.name;
         this.modelId = rawDevice.modelId;
@@ -20,6 +27,7 @@ export default class Device {
         this.openToPublic = rawDevice.public;
         this.ajax = new Ajax(config.ajax);
         this.history = new DeviceHistory(rawDevice, config);
+        //KM should we allow the config, commands, or metadata to be included and then have the defaults under an ||?
         this.configurations = [];
         this.commands = [];
         this.metadata = {};
@@ -41,7 +49,9 @@ export default class Device {
         }
 
         return new Promise((resolve, reject) => {
-            this.ajax.patch(`/devices/${this.id}`, patch, { raw: raw })
+            this.ajax.patch(`/devices/${this.id}`, patch, {
+                raw: raw
+            })
                 .then((response) => {
                     this.name = response.name;
                     this.modelId = response.modelId;
@@ -56,6 +66,7 @@ export default class Device {
 
 
     getHistoricalData(opts) {
+        //KM do we have to init "this" having a .history in the beginning? 
         return this.history.getHistoricalData(opts);
     }
 
@@ -93,7 +104,9 @@ export default class Device {
         }
 
         return new Promise((resolve, reject) => {
-            this.ajax.patch(`/devices/${this.id}`, patch, { raw: raw })
+            this.ajax.patch(`/devices/${this.id}`, patch, {
+                raw: raw
+            })
                 .then((response) => {
                     resolve(response);
                 }).catch((error) => {
@@ -126,6 +139,7 @@ export default class Device {
         });
     }
 
+    //KM what does this do? establish a real-time stream? How do you do that with a resolve?
     connect(transport = 'mqtt') {
         let connection = new Connection();
         let getChannel = this.getChannel();

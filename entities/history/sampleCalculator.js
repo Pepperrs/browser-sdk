@@ -1,11 +1,15 @@
+//convert an hour into milliseconds
 var oneHourMs = 1000 * 3600;
+
+//figure out the days in the current month
 var daysInMonth = function() {
     var d = new Date();
     d.setDate(0);
     return d.getDate();
 };
 
-function calculateTimeframe(timeframeStr)  {
+
+function calculateTimeframe(timeframeStr) {
     var obj = {
         end: new Date()
     };
@@ -13,6 +17,7 @@ function calculateTimeframe(timeframeStr)  {
     var sampleSize = null;
     switch (timeframeStr) {
         case '1h':
+            //if you want to get history for an hour, the start time will be the current time minus an hour (of milliseconds)
             startDate = new Date(obj.end.getTime() - oneHourMs);
             sampleSize = '1m';
             break;
@@ -37,10 +42,13 @@ function calculateTimeframe(timeframeStr)  {
             sampleSize = '1h';
             break;
     };
+    //now that the start time is calculated based on how much history you want, you can set it in the object
     obj.start = startDate;
+    //the sampleSize scales based on how big an interval you want to look at
     obj.sampleSize = sampleSize;
 
     return obj;
 };
 
-export default calculateTimeframe;
+export
+default calculateTimeframe;

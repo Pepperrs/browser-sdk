@@ -69,7 +69,7 @@ default class User {
         })
     }
 
-    //this internal method does..........................................................................
+    //this internal method does??
     _getConfig() {
         return this.config;
     }

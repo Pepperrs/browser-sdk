@@ -1,6 +1,6 @@
 export
 default class DeviceHistoryPoints {
-    //KM what are the poijnts for? is it like an array of the history readings or something?
+    //KM what are the points for? is it like an array of the history readings or something?
     constructor(deviceHistory) {
         if (!deviceHistory) {
             return {};

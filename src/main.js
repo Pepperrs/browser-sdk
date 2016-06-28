@@ -28,7 +28,7 @@ let currentUser;
 let project;
 let oauth2;
 
-//KM what it the init/authorize process here? How do you work with it with an "export default" rather than a class name?
+
 export
 default {
     //KM does p by definition include redirect and appID like last time? Should we make that clearer here, or somewhere?
@@ -40,6 +40,7 @@ default {
         }
     },
 
+    //KM how do you pass in to oauth the option to persist (which defaults to false) if the only input is the token?
     authorize: function(optionalToken) {
         return new Promise((resolve, reject) => {
 

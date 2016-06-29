@@ -4,7 +4,7 @@ class Oauth2 {
         this.uri = options.uri || 'api.relayr.io';
         this.appId = options.appId;
         this.redirectURI = options.redirectURI;
-        this.shouldPersist = options.persist || false;
+        this.shouldPersist = options.persist || true;
         this.protocol = options.protocol || 'https://';
     }
 
@@ -24,8 +24,7 @@ class Oauth2 {
         }
         try {
             if (this._parseToken(window.location.href)) return;
-        } catch (e) {
-        }
+        } catch (e) {}
 
         let authURL = {
             client_id: this.appId,
@@ -60,11 +59,11 @@ class Oauth2 {
         }, {});
 
 
-        if (!authParams.token_type) {
+        if (!authParams.tokenType) {
             throw Error('The provided URL does not contain a access token');
         }
 
-        this.token = authParams.token_type + ' ' + authParams.access_token;
+        this.token = authParams.tokenType + ' ' + authParams.access_token;
 
         this.setToken(this.token);
         return this.token;

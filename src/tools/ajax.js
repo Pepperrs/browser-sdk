@@ -1,7 +1,7 @@
 export
 default class Ajax {
     constructor(options) {
-        this.tokenType = options.tokenType || 'Bearer';
+        this.tokenType = 'Bearer';
         this.token = options.token;
         this.uri = options.uri || 'api.relayr.io/';
         this.protocol = options.protocol || 'https://';
